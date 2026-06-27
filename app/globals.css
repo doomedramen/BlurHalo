@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #030303;
+    --foreground: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.55);
+    --muted-foreground: rgba(255, 255, 255, 0.55);
+    --border: rgba(255, 255, 255, 0.06);
+    --ring: #5e6ad2;
+    --radius: 0.5rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    min-height: 100%;
+    background: #030303;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    color: rgba(255, 255, 255, 0.92);
+    background:
+      radial-gradient(ellipse 80% 50% at 15% 0%, rgba(94, 106, 210, 0.12), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 85% 15%, rgba(139, 92, 246, 0.1), transparent 50%),
+      radial-gradient(ellipse 50% 50% at 50% 100%, rgba(34, 197, 94, 0.04), transparent 60%);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .bg-grid-sm {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #fff 0%, rgba(212, 212, 255, 0.7) 40%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
