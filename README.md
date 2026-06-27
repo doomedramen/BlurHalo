@@ -106,6 +106,12 @@ Drop a single CSS file — no JavaScript, no build step.
 └─────────────────────────────────────┘
 ```
 
+## Credits
+
+Inspired by [Unnecessary Inventions](https://www.youtube.com/@UnnecessaryInventions) — the idea came from [this moment](https://www.youtube.com/watch?v=QJRioPIB4x8&t=624s) in one of their videos.
+
+![Reference](public/reference.png)
+
 ## License
 
 MIT
