@@ -261,12 +261,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 18px;
+      gap: 16px;
+      padding: 12px 18px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.015);
     }
 
-    .traffic { display: flex; gap: 6px; }
+    .traffic { display: flex; gap: 6px; flex-shrink: 0; }
 
     .traffic span {
       width: 9px; height: 9px;
@@ -277,12 +278,22 @@
     .traffic span:nth-child(2) { background: #ffbd2e; }
     .traffic span:nth-child(3) { background: #27ca40; }
 
+    .topbar-search {
+      flex: 1;
+      max-width: 200px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
     .topbar-tabs {
       display: flex;
       gap: 2px;
       padding: 3px;
       border-radius: 99px;
       background: rgba(255, 255, 255, 0.04);
+      flex-shrink: 0;
     }
 
     .topbar-tabs span {
@@ -298,68 +309,200 @@
       color: rgba(255, 255, 255, 0.75);
     }
 
+    .topbar-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .topbar-icon {
+      width: 16px; height: 16px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
     .topbar-avatar {
-      width: 24px; height: 24px;
+      width: 22px; height: 22px;
       border-radius: 99px;
-      background: linear-gradient(135deg, var(--blue), var(--violet));
+      background: linear-gradient(135deg, #5e6ad2, #8b5cf6);
       opacity: 0.7;
     }
 
     .preview-body {
       position: relative;
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 18px;
-      padding: 18px;
+      grid-template-columns: 150px 1fr;
+      gap: 16px;
+      padding: 16px 18px;
       height: calc(100% - 46px);
+      overflow: hidden;
     }
 
     .preview-sidebar {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 2px;
     }
 
-    .sidebar-item {
+    .sidebar-section {
+      color: rgba(255, 255, 255, 0.2);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 4px 6px;
+    }
+
+    .sidebar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       height: 28px;
+      padding: 0 6px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      transition: all 0.3s ease;
     }
 
-    .sidebar-item:nth-child(1) { background: var(--blue); opacity: 0.15; width: 100%; }
-    .sidebar-item:nth-child(2) { width: 75%; }
-    .sidebar-item:nth-child(3) { width: 88%; }
-    .sidebar-item:nth-child(4) { width: 60%; }
-    .sidebar-item:nth-child(5) { width: 82%; }
-    .sidebar-item:nth-child(6) { width: 68%; }
-    .sidebar-item:nth-child(7) { width: 90%; }
+    .sidebar-row.active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-dot {
+      width: 14px; height: 14px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-dot.c1 { background: rgba(94, 106, 210, 0.5); }
+    .sidebar-dot.c2 { background: rgba(139, 92, 246, 0.5); }
+    .sidebar-dot.c3 { background: rgba(245, 158, 11, 0.5); }
+    .sidebar-dot.c4 { background: rgba(34, 197, 94, 0.5); }
+    .sidebar-dot.c5 { background: rgba(239, 68, 68, 0.5); }
+    .sidebar-dot.c6 { background: rgba(20, 184, 166, 0.5); }
+
+    .sidebar-label {
+      height: 8px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.06);
+    }
 
     .preview-main {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
+      overflow-y: hidden;
     }
 
-    .preview-row {
+    .issue-row {
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.025);
-      padding: 14px 16px;
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
     }
 
-    .preview-row-inner {
-      height: 10px;
+    .issue-priority {
+      width: 8px; height: 8px;
+      border-radius: 99px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .issue-priority.urgent { background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.4); }
+    .issue-priority.high   { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+    .issue-priority.medium { background: #5e6ad2; box-shadow: 0 0 8px rgba(94, 106, 210, 0.4); }
+    .issue-priority.low    { background: rgba(255, 255, 255, 0.3); }
+
+    .issue-body { flex: 1; min-width: 0; }
+
+    .issue-title {
+      height: 9px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.10);
       margin-bottom: 8px;
     }
 
-    .preview-row-inner:last-child { margin-bottom: 0; }
-    .preview-row-inner:nth-child(1) { width: 32%; background: rgba(255, 255, 255, 0.10); }
-    .preview-row-inner:nth-child(2) { width: 84%; }
-    .preview-row-inner:nth-child(3) { width: 56%; }
+    .issue-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .issue-label {
+      height: 16px;
+      padding: 0 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.6);
+      display: inline-flex;
+      align-items: center;
+      font-weight: 500;
+    }
+    .issue-label.l1 { background: rgba(94, 106, 210, 0.15); width: 42px; }
+    .issue-label.l2 { background: rgba(34, 197, 94, 0.15); width: 38px; }
+    .issue-label.l3 { background: rgba(245, 158, 11, 0.15); width: 48px; }
+    .issue-label.l4 { background: rgba(139, 92, 246, 0.15); width: 34px; }
+
+    .issue-avatar {
+      width: 16px; height: 16px;
+      border-radius: 99px;
+      flex-shrink: 0;
+    }
+    .issue-avatar.a1 { background: linear-gradient(135deg, #5e6ad2, #8b5cf6); }
+    .issue-avatar.a2 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .issue-avatar.a3 { background: linear-gradient(135deg, #22c55e, #14b8a6); }
+    .issue-avatar.a4 { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
+
+    .issue-id {
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 10px;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .table-head {
+      display: grid;
+      grid-template-columns: 1fr 80px 100px 60px;
+      gap: 12px;
+      padding: 0 4px 6px;
+    }
+
+    .table-head span {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 100px 60px;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .table-cell {
+      height: 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .status-pill {
+      height: 18px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 9px;
+      font-weight: 500;
+    }
+    .status-pill.done { background: rgba(34, 197, 94, 0.12); width: 50px; }
+    .status-pill.progress { background: rgba(245, 158, 11, 0.12); width: 64px; }
+    .status-pill.todo { background: rgba(255, 255, 255, 0.05); width: 44px; }
+    .status-pill.review { background: rgba(139, 92, 246, 0.12); width: 54px; }
 
     .preview-trigger {
       position: absolute;
@@ -401,8 +544,8 @@
 
     .blurhalo {
       --bh-size: 96px;
-      --bh-fade: 80px;
-      --bh-blur: 24px;
+      --bh-fade: 96px;
+      --bh-blur: 16px;
       --bh-radius: 24px;
       --bh-tint: transparent;
 
@@ -438,14 +581,8 @@
       will-change: backdrop-filter;
       opacity: 0;
       transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      mask-image:
-        linear-gradient(to right, transparent 0, black var(--bh-fade), black calc(100% - var(--bh-fade)), transparent 100%),
-        linear-gradient(to bottom, transparent 0, black var(--bh-fade), black calc(100% - var(--bh-fade)), transparent 100%);
-      mask-composite: intersect;
-      -webkit-mask-image:
-        linear-gradient(to right, transparent 0, black var(--bh-fade), black calc(100% - var(--bh-fade)), transparent 100%),
-        linear-gradient(to bottom, transparent 0, black var(--bh-fade), black calc(100% - var(--bh-fade)), transparent 100%);
-      -webkit-mask-composite: source-in;
+      mask-image: radial-gradient(ellipse at center, black calc(var(--bh-fade) * 0.45), transparent calc(var(--bh-fade) * 1.1));
+      -webkit-mask-image: radial-gradient(ellipse at center, black calc(var(--bh-fade) * 0.45), transparent calc(var(--bh-fade) * 1.1));
     }
 
     .blurhalo.active::before {
@@ -523,57 +660,12 @@
 
     .dialog-body { padding: 16px 20px 20px; }
 
-    .setting {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.2s ease;
-    }
-
-    .setting:first-child { padding-top: 0; }
-    .setting:last-of-type { border-bottom: 0; }
-    .setting:hover { opacity: 0.9; }
-
-    .setting strong {
-      display: block;
+    .dialog-message {
+      margin: 0;
+      color: var(--muted);
       font-size: 13px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      line-height: 1.65;
     }
-
-    .setting span {
-      display: block;
-      margin-top: 3px;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 12px;
-    }
-
-    .switch {
-      flex-shrink: 0;
-      width: 38px; height: 22px;
-      border-radius: 99px;
-      padding: 2px;
-      background: rgba(94, 106, 210, 0.25);
-      border: 1px solid rgba(94, 106, 210, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .switch::before {
-      content: "";
-      display: block;
-      width: 16px; height: 16px;
-      margin-left: auto;
-      border-radius: 99px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      transition: all 0.25s ease;
-    }
-
-    .switch.on { background: rgba(94, 106, 210, 0.55); border-color: rgba(94, 106, 210, 0.6); }
 
     .dialog-actions {
       display: flex;
@@ -613,38 +705,125 @@
 
     .controls {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-end;
+      gap: 20px;
       flex-wrap: wrap;
-      margin-top: 14px;
-      font-size: 12px;
-      color: var(--faint);
+      margin-top: 16px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .control-group {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 100px;
+      flex: 1;
     }
 
-    .control-group label { color: var(--muted); font-weight: 500; }
+    .control-group label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 550;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .control-group label span {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+    }
 
     .control-group input[type="range"] {
       -webkit-appearance: none;
-      width: 80px;
-      height: 4px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.1);
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
       outline: none;
+      cursor: pointer;
+      background-image: linear-gradient(to right, var(--blue), var(--range-fill, 33%));
+      background-size: var(--range-fill, 33%) 100%;
+      background-repeat: no-repeat;
     }
 
     .control-group input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 14px; height: 14px;
+      appearance: none;
+      width: 18px; height: 18px;
       border-radius: 99px;
-      background: var(--blue);
+      background: #fff;
       cursor: pointer;
-      border: 2px solid rgba(0, 0, 0, 0.4);
+      margin-top: -6px;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .control-group input[type="range"]::-webkit-slider-thumb:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      transform: scale(1.1);
+    }
+
+    .control-group input[type="range"]::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 99px;
+      background: #fff;
+      cursor: pointer;
+      border: 2px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .controls-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border);
+      margin: 11px 4px;
+    }
+
+    .control-presets {
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    .preset-btn {
+      height: 30px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .preset-btn:hover {
+      color: var(--text);
+      border-color: var(--border-strong);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .preset-btn:active {
+      background: rgba(255, 255, 255, 0.08);
+      transform: scale(0.97);
     }
 
     /* ── Section ──────────────────────────────── */
@@ -831,7 +1010,9 @@
         --bh-fade: 40px;
         --bh-blur: 18px;
       }
-      .controls { flex-direction: column; align-items: flex-start; }
+      .controls { gap: 14px; }
+      .controls-divider { display: none; }
+      .control-presets { width: 100%; }
     }
   </style>
 
@@ -880,43 +1061,107 @@
           <div class="preview-grid"></div>
           <div class="preview-topbar">
             <div class="traffic"><span></span><span></span><span></span></div>
+            <div class="topbar-search"></div>
             <div class="topbar-tabs">
               <span>Issues</span>
               <span class="active">Board</span>
               <span>Backlog</span>
             </div>
-            <div class="topbar-avatar"></div>
+            <div class="topbar-actions">
+              <div class="topbar-icon"></div>
+              <div class="topbar-icon"></div>
+              <div class="topbar-avatar"></div>
+            </div>
           </div>
           <div class="preview-body">
             <div class="preview-sidebar">
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
-              <div class="sidebar-item"></div>
+              <div class="sidebar-section">Teams</div>
+              <div class="sidebar-row active">
+                <div class="sidebar-dot c1"></div>
+                <div class="sidebar-label" style="width:68px"></div>
+              </div>
+              <div class="sidebar-row">
+                <div class="sidebar-dot c2"></div>
+                <div class="sidebar-label" style="width:52px"></div>
+              </div>
+              <div class="sidebar-row">
+                <div class="sidebar-dot c3"></div>
+                <div class="sidebar-label" style="width:72px"></div>
+              </div>
+              <div class="sidebar-section">Views</div>
+              <div class="sidebar-row">
+                <div class="sidebar-dot c4"></div>
+                <div class="sidebar-label" style="width:56px"></div>
+              </div>
+              <div class="sidebar-row">
+                <div class="sidebar-dot c5"></div>
+                <div class="sidebar-label" style="width:44px"></div>
+              </div>
+              <div class="sidebar-row">
+                <div class="sidebar-dot c6"></div>
+                <div class="sidebar-label" style="width:60px"></div>
+              </div>
             </div>
             <div class="preview-main">
-              <div class="preview-row">
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
+              <div class="issue-row">
+                <div class="issue-priority urgent"></div>
+                <div class="issue-body">
+                  <div class="issue-title" style="width:72%"></div>
+                  <div class="issue-meta">
+                    <div class="issue-label l1"></div>
+                    <div class="issue-label l2"></div>
+                    <div class="issue-avatar a1"></div>
+                    <div class="issue-avatar a3"></div>
+                  </div>
+                </div>
+                <div class="issue-id">#142</div>
               </div>
-              <div class="preview-row">
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
+              <div class="issue-row">
+                <div class="issue-priority high"></div>
+                <div class="issue-body">
+                  <div class="issue-title" style="width:58%"></div>
+                  <div class="issue-meta">
+                    <div class="issue-label l3"></div>
+                    <div class="issue-avatar a2"></div>
+                  </div>
+                </div>
+                <div class="issue-id">#141</div>
               </div>
-              <div class="preview-row">
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
+              <div class="issue-row">
+                <div class="issue-priority medium"></div>
+                <div class="issue-body">
+                  <div class="issue-title" style="width:85%"></div>
+                  <div class="issue-meta">
+                    <div class="issue-label l4"></div>
+                    <div class="issue-label l1"></div>
+                    <div class="issue-avatar a4"></div>
+                    <div class="issue-avatar a1"></div>
+                  </div>
+                </div>
+                <div class="issue-id">#140</div>
               </div>
-              <div class="preview-row">
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
-                <div class="preview-row-inner"></div>
+              <div class="issue-row">
+                <div class="issue-priority low"></div>
+                <div class="issue-body">
+                  <div class="issue-title" style="width:65%"></div>
+                  <div class="issue-meta">
+                    <div class="issue-label l2"></div>
+                    <div class="issue-avatar a3"></div>
+                  </div>
+                </div>
+                <div class="issue-id">#139</div>
+              </div>
+              <div class="issue-row">
+                <div class="issue-priority medium"></div>
+                <div class="issue-body">
+                  <div class="issue-title" style="width:78%"></div>
+                  <div class="issue-meta">
+                    <div class="issue-label l1"></div>
+                    <div class="issue-label l4"></div>
+                    <div class="issue-label l3"></div>
+                  </div>
+                </div>
+                <div class="issue-id">#138</div>
               </div>
             </div>
           </div>
@@ -937,20 +1182,10 @@
                 </p>
               </div>
               <div class="dialog-body">
-                <div class="setting">
-                  <div>
-                    <strong>Preview channel</strong>
-                    <span>Share a temporary build before production.</span>
-                  </div>
-                  <div class="switch on" aria-hidden="true"></div>
-                </div>
-                <div class="setting">
-                  <div>
-                    <strong>Protected deploy</strong>
-                    <span>Require confirmation before promoting.</span>
-                  </div>
-                  <div class="switch" aria-hidden="true"></div>
-                </div>
+                <p class="dialog-message">
+                  This action will deploy the current build to production. Make sure
+                  all tests have passed and the changes have been reviewed.
+                </p>
                 <div class="dialog-actions">
                   <button class="dialog-button" id="cancelBtn">Cancel</button>
                   <button class="dialog-button primary" id="publishBtn">Publish</button>
@@ -962,19 +1197,22 @@
 
         <div class="controls">
           <div class="control-group">
-            <label for="blurSlider">Blur</label>
-            <input type="range" id="blurSlider" min="2" max="48" value="24" />
-            <span id="blurValue">24px</span>
+            <label>Blur <span id="blurValue">16px</span></label>
+            <input type="range" id="blurSlider" min="2" max="48" value="16" />
           </div>
           <div class="control-group">
-            <label for="fadeSlider">Fade</label>
-            <input type="range" id="fadeSlider" min="8" max="140" value="80" />
-            <span id="fadeValue">80px</span>
+            <label>Spread <span id="fadeValue">260px</span></label>
+            <input type="range" id="fadeSlider" min="0" max="480" value="260" />
           </div>
           <div class="control-group">
-            <label for="radiusSlider">Radius</label>
+            <label>Radius <span id="radiusValue">24px</span></label>
             <input type="range" id="radiusSlider" min="4" max="48" value="24" />
-            <span id="radiusValue">24px</span>
+          </div>
+          <div class="controls-divider"></div>
+          <div class="control-presets">
+            <button class="preset-btn" data-preset="subtle">Subtle</button>
+            <button class="preset-btn" data-preset="default">Default</button>
+            <button class="preset-btn" data-preset="heavy">Heavy</button>
           </div>
         </div>
       </div>
@@ -1026,10 +1264,10 @@
         <div class="code-block-wrapper">
           <button class="copy-btn" data-target="cssSnippet">Copy</button>
 <pre id="cssSnippet"><code><span class="token-selector">.blurhalo</span> {
-  <span class="token-prop">--blurhalo-size</span>: <span class="token-value">112px</span>;
-  <span class="token-prop">--blurhalo-fade</span>: <span class="token-value">92px</span>;
-  <span class="token-prop">--blurhalo-blur</span>: <span class="token-value">26px</span>;
-  <span class="token-prop">--blurhalo-radius</span>: <span class="token-value">28px</span>;
+  <span class="token-prop">--blurhalo-size</span>: <span class="token-value" id="snippetSize">112px</span>;
+  <span class="token-prop">--blurhalo-fade</span>: <span class="token-value" id="snippetFade">92px</span>;
+  <span class="token-prop">--blurhalo-blur</span>: <span class="token-value" id="snippetBlur">26px</span>;
+  <span class="token-prop">--blurhalo-radius</span>: <span class="token-value" id="snippetRadius">28px</span>;
   <span class="token-prop">--blurhalo-tint</span>: <span class="token-func">rgba</span>(<span class="token-value">255</span>, <span class="token-value">255</span>, <span class="token-value">255</span>, <span class="token-value">0.075</span>);
 
   <span class="token-prop">position</span>: <span class="token-value">relative</span>;
@@ -1110,18 +1348,46 @@
     publishBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
 
     /* ── Slider controls ─────────────────────── */
-    const sliders = {
-      blur:   { slider: 'blurSlider',   value: 'blurValue',   prop: '--bh-blur',   unit: 'px', suffix: 'px' },
-      fade:   { slider: 'fadeSlider',   value: 'fadeValue',   prop: '--bh-fade',   unit: 'px', suffix: 'px' },
-      radius: { slider: 'radiusSlider', value: 'radiusValue', prop: '--bh-radius', unit: 'px', suffix: 'px' },
+    const presets = {
+      subtle:  { blur: 8,  fade: 120, radius: 16 },
+      default: { blur: 16, fade: 260, radius: 24 },
+      heavy:   { blur: 32, fade: 400, radius: 32 },
     };
+
+    const sliders = {
+      blur:   { slider: 'blurSlider',   value: 'blurValue',   prop: '--bh-blur',   unit: 'px', suffix: 'px', snippet: 'snippetBlur' },
+      fade:   { slider: 'fadeSlider',   value: 'fadeValue',   prop: '--bh-fade',   unit: 'px', suffix: 'px', snippet: 'snippetFade' },
+      radius: { slider: 'radiusSlider', value: 'radiusValue', prop: '--bh-radius', unit: 'px', suffix: 'px', snippet: 'snippetRadius' },
+    };
+
+    function applySliderValue(cfg, value) {
+      const slider = document.getElementById(cfg.slider);
+      const display = document.getElementById(cfg.value);
+      const snippetEl = document.getElementById(cfg.snippet);
+      const val = value + cfg.unit;
+      const pct = ((value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.value = value;
+      slider.style.setProperty('--range-fill', pct + '%');
+      blurhalo.style.setProperty(cfg.prop, val);
+      display.textContent = value + cfg.suffix;
+      if (snippetEl) snippetEl.textContent = val;
+    }
 
     Object.values(sliders).forEach(cfg => {
       const slider = document.getElementById(cfg.slider);
-      const display = document.getElementById(cfg.value);
-      slider.addEventListener('input', () => {
-        blurhalo.style.setProperty(cfg.prop, slider.value + cfg.unit);
-        display.textContent = slider.value + cfg.suffix;
+      slider.addEventListener('input', () => applySliderValue(cfg, slider.value));
+      /* initial fill */
+      slider.style.setProperty('--range-fill', ((slider.value - slider.min) / (slider.max - slider.min)) * 100 + '%');
+    });
+
+    /* ── Preset buttons ──────────────────────── */
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = presets[btn.dataset.preset];
+        if (!preset) return;
+        applySliderValue(sliders.blur, preset.blur);
+        applySliderValue(sliders.fade, preset.fade);
+        applySliderValue(sliders.radius, preset.radius);
       });
     });
 
@@ -1162,13 +1428,6 @@
       if (e.target === blurhalo) close();
     });
 
-    /* ── Switch toggles in dialog ────────────── */
-    document.querySelectorAll('.switch').forEach(sw => {
-      sw.addEventListener('click', (e) => {
-        e.stopPropagation();
-        sw.classList.toggle('on');
-      });
-    });
   </script>
 </body>
 </html>
