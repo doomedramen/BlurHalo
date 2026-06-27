@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "BlurHalo — feathered backdrop blur around focused content",
   description:
-    "A Radix-powered dialog component that paints a feathered backdrop-blur halo around focused surfaces. The content stays sharp while the area around it softly blurs.",
+    "A self-contained React dialog component that paints a feathered backdrop-blur halo around focused surfaces. The content stays sharp while the area around it softly blurs.",
 };
 
 export default function RootLayout({
