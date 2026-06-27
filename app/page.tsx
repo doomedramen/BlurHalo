@@ -13,52 +13,59 @@ import {
   BlurHaloTitle,
   BlurHaloDescription,
   BlurHaloFooter,
-  BlurHaloTrigger,
 } from "@/components/BlurHalo";
 
 const htmlSnippet = `<div class="blurhalo">
-  <div class="blurhalo__content dialog">
+  <div class="blurhalo__halo" aria-hidden="true"></div>
+  <div class="blurhalo__content">
     <h2>Dialog title</h2>
     <p>The content stays sharp.</p>
   </div>
 </div>`;
 
 const cssSnippet = `.blurhalo {
-  --blurhalo-size:  130px;
-  --blurhalo-fade:  60px;
-  --blurhalo-blur:  16px;
+  --blurhalo-blur: 16px;
+  --blurhalo-fade: 60px;
   --blurhalo-radius: 24px;
   --blurhalo-tint: rgba(255,255,255,0.075);
 
   position: relative;
-  display: grid;
-  place-items: center;
-  padding: var(--blurhalo-size);
   isolation: isolate;
 }
 
-.blurhalo::before {
-  content: "";
+.blurhalo__halo {
   position: absolute;
-  inset: 0;
+  inset: calc(-1 * var(--blurhalo-fade));
   z-index: 0;
   pointer-events: none;
-  border-radius: calc(var(--blurhalo-radius) + var(--blurhalo-size));
   background: var(--blurhalo-tint);
-  backdrop-filter: blur(var(--blurhalo-blur)) saturate(1.35);
+  backdrop-filter: blur(var(--blurhalo-blur));
+  -webkit-backdrop-filter: blur(var(--blurhalo-blur));
 
   mask-image:
     linear-gradient(to right,
       transparent 0,
-      black var(--blurhalo-fade),
-      black calc(100% - var(--blurhalo-fade)),
+      #000 var(--blurhalo-fade),
+      #000 calc(100% - var(--blurhalo-fade)),
       transparent 100%),
     linear-gradient(to bottom,
       transparent 0,
-      black var(--blurhalo-fade),
-      black calc(100% - var(--blurhalo-fade)),
+      #000 var(--blurhalo-fade),
+      #000 calc(100% - var(--blurhalo-fade)),
       transparent 100%);
   mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right,
+      transparent 0,
+      #000 var(--blurhalo-fade),
+      #000 calc(100% - var(--blurhalo-fade)),
+      transparent 100%),
+    linear-gradient(to bottom,
+      transparent 0,
+      #000 var(--blurhalo-fade),
+      #000 calc(100% - var(--blurhalo-fade)),
+      transparent 100%);
+  -webkit-mask-composite: source-in;
 }
 
 .blurhalo__content {
@@ -191,26 +198,25 @@ export default function Page() {
         {/* ── API section ──────────────────────────── */}
         <RevealSection>
           <section id="api" className="mt-24">
-            <h2 className="mb-2.5 text-[30px] font-semibold -tracking-[0.05em]">Recommended structure</h2>
+            <h2 className="mb-2.5 text-[30px] font-semibold -tracking-[0.05em]">How it works</h2>
             <p className="mb-7 max-w-[680px] text-[15px] leading-relaxed text-black/60 dark:text-white/55">
-              Use a padded wrapper for the halo and a separate child for the content.
-              The wrapper owns the backdrop blur. The content is positioned above it.
-              This avoids the fragile 8-piece border approach while still supporting
-              rounded corners through one shared radius variable.
+              BlurHalo renders an independently-sized halo layer behind the dialog using negative inset.
+              The halo extends beyond the content and uses a feathered mask so the blur fades outward.
+              The dialog body sits above the halo so its content stays sharp.
             </p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 {
-                  title: "1. The wrapper creates space",
-                  desc: ".blurhalo uses padding to reserve the feathered blur area around the dialog.",
+                  title: "1. The halo extends outward",
+                  desc: "Using negative inset, a sibling div reaches beyond the dialog's edges to create the blur zone.",
                 },
                 {
-                  title: "2. The pseudo-element blurs",
-                  desc: ".blurhalo::before applies backdrop-filter, tint, radius, and feathered masking.",
+                  title: "2. The mask feathers the blur",
+                  desc: "Two crossed linear-gradient masks create a rectangular fade from opaque at the dialog edge to transparent at the halo rim.",
                 },
                 {
                   title: "3. The content stays sharp",
-                  desc: ".blurhalo__content sits above the blur layer, so text, controls, and icons are not blurred.",
+                  desc: "Stacked at a higher z-index, the dialog body sits above the halo so text and controls are never blurred.",
                 },
               ].map((card) => (
                 <div

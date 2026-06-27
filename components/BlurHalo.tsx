@@ -51,6 +51,12 @@ interface BlurHaloContentProps
   container?: HTMLElement | null;
 }
 
+/**
+ * The main dialog content — renders an overlay, a feathered backdrop-blur
+ * halo around the dialog body, and the dialog body itself. The halo extends
+ * `spread` pixels beyond the body and fades from full blur at the dialog
+ * edge to zero blur at the outer rim via crossed linear-gradient masks.
+ */
 const BlurHaloContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   BlurHaloContentProps
