@@ -16,7 +16,7 @@ export function Nav() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="flex w-full items-center justify-between gap-5 rounded-full border border-black/[0.08] dark:border-white/[0.06] bg-white/70 dark:bg-[#030303]/70 px-5 py-3 backdrop-blur-2xl backdrop-saturate-200 shadow-[inset_0_1px_0_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.3)]">
+    <nav className="flex w-full items-center justify-between gap-5 rounded-full border border-black/[0.08] dark:border-white/[0.06] bg-white/70 dark:bg-[#030303]/70 px-5 py-3 backdrop-blur-2xl backdrop-saturate-200">
       <a href="#" className="inline-flex items-center gap-2.5 text-[15px] font-semibold tracking-tight text-foreground">
         <span className="h-[26px] w-[26px] rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),0_8px_24px_rgba(94,106,210,0.25)] [background-image:linear-gradient(135deg,#fff,rgba(255,255,255,0.4)),linear-gradient(180deg,#5e6ad2,#8b5cf6)]" />
         BlurHalo

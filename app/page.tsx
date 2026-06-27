@@ -161,7 +161,7 @@ export default function Page() {
                 Copy the snippet
               </a>
               <a
-                href="https://github.com/doomedramen/blurhalo"
+                href="https://github.com/doomedramen/BlurHalo"
                 target="_blank"
                 rel="noopener"
                 className="inline-flex min-h-10 items-center gap-1.5 rounded-xl border border-black/[0.10] dark:border-white/[0.10] bg-black/[0.03] dark:bg-white/[0.03] px-5 text-sm font-medium text-black/90 dark:text-white/90 transition hover:bg-black/[0.06] dark:hover:bg-white/[0.06] hover:border-black/[0.14] dark:hover:border-white/[0.14]"
@@ -226,7 +226,7 @@ export default function Page() {
             <p className="mb-3 text-[14px] leading-relaxed text-black/55 dark:text-white/50">
               <strong>1.</strong> Download{" "}
               <a
-                href="https://github.com/doomedramen/blurhalo/blob/main/standalone/BlurHalo.tsx"
+                href="https://github.com/doomedramen/BlurHalo/blob/main/standalone/BlurHalo.tsx"
                 target="_blank"
                 rel="noopener"
                 className="underline hover:text-black dark:hover:text-white"
@@ -267,8 +267,8 @@ export default function Page() {
         {/* ── Footer ───────────────────────────────── */}
         <footer className="mt-[72px] flex items-center justify-between border-t border-black/[0.06] dark:border-white/[0.06] pt-7 text-[13px] text-black/35 dark:text-white/35">
           <span>BlurHalo — open-source UI pattern</span>
-          <a href="https://github.com/doomedramen/blurhalo" target="_blank" rel="noopener" className="hover:text-black dark:hover:text-white">
-            GitHub.com/doomedramen/blurhalo
+          <a href="https://github.com/doomedramen/BlurHalo" target="_blank" rel="noopener" className="hover:text-black dark:hover:text-white">
+            GitHub.com/doomedramen/BlurHalo
           </a>
         </footer>
       </main>

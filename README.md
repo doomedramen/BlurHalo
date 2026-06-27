@@ -2,7 +2,7 @@
 
 Feathered backdrop-blur for modals, dialogs, and focused surfaces. The content stays sharp while the area *around* it receives a rounded, feathered blur that fades back into the page — the rest of the page stays crisp.
 
-[**Live demo →**](https://doomedramen.github.io/blurhalo)
+[**Live demo →**](https://doomedramen.github.io/BlurHalo)
 
 > ![screenshot](screenshot.png)
 
