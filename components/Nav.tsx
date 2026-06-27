@@ -1,0 +1,47 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
+
+const links = [
+  { href: "#demo", label: "Demo" },
+  { href: "#api", label: "API" },
+  { href: "#code", label: "Code" },
+];
+
+export function Nav() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  return (
+    <nav className="flex w-full items-center justify-between gap-5 rounded-full border border-black/[0.08] dark:border-white/[0.06] bg-white/70 dark:bg-[#030303]/70 px-5 py-3 backdrop-blur-2xl backdrop-saturate-200 shadow-[inset_0_1px_0_rgba(0,0,0,0.04),0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_32px_rgba(0,0,0,0.3)]">
+      <a href="#" className="inline-flex items-center gap-2.5 text-[15px] font-semibold tracking-tight text-foreground">
+        <span className="h-[26px] w-[26px] rounded-lg bg-gradient-to-br from-blue-500 to-violet-500 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15),0_8px_24px_rgba(94,106,210,0.25)] [background-image:linear-gradient(135deg,#fff,rgba(255,255,255,0.4)),linear-gradient(180deg,#5e6ad2,#8b5cf6)]" />
+        BlurHalo
+      </a>
+      <div className="flex items-center gap-1">
+        {links.map(({ href, label }) => (
+          <a
+            key={href}
+            href={href}
+            className="rounded-full px-3.5 py-1.5 text-[13px] font-medium text-black/50 dark:text-white/55 transition hover:bg-black/5 dark:hover:bg-white/[0.06] hover:text-black dark:hover:text-white"
+          >
+            {label}
+          </a>
+        ))}
+        {mounted && (
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="ml-1 rounded-full p-1.5 text-black/40 dark:text-white/40 transition hover:bg-black/5 dark:hover:bg-white/[0.06] hover:text-black dark:hover:text-white"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+        )}
+      </div>
+    </nav>
+  );
+}

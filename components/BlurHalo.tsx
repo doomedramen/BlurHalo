@@ -28,10 +28,26 @@ BlurHaloOverlay.displayName = "BlurHaloOverlay";
 
 interface BlurHaloContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  /** How far (in px) the blurred halo extends beyond the dialog edge. Default 80. */
   spread?: number;
+  /** Blur intensity from 0 (none) to 1 (max). Multiplied against `maxBlur`. Default 0.5. */
   strength?: number;
+  /** Maximum blur radius in px when `strength` is 1. Default 32. */
+  maxBlur?: number;
+  /** Show the built-in close button. Default true. */
   showClose?: boolean;
+  /** Optional subtle background color for the halo (e.g. "rgba(255,255,255,0.05)"). Adds a tint/dim behind the blur. */
+  tint?: string;
+  /**
+   * className applied to the dialog body (border, bg, radius, padding, etc.).
+   * The halo is rendered as an independent sibling and is not affected by this.
+   */
   className?: string;
+  /**
+   * DOM element to render the portal into. Useful for containing the dialog
+   * within a specific parent (e.g. for a demo preview panel). Defaults to
+   * `document.body`.
+   */
   container?: HTMLElement | null;
 }
 
@@ -44,8 +60,10 @@ const BlurHaloContent = React.forwardRef<
       className,
       children,
       spread = 80,
-      strength = 16,
+      strength = 0.5,
+      maxBlur = 32,
       showClose = true,
+      tint,
       container,
       ...props
     },
@@ -54,17 +72,18 @@ const BlurHaloContent = React.forwardRef<
     const maskGradientH = `linear-gradient(to right, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%)`;
     const maskGradientV = `linear-gradient(to bottom, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%)`;
 
-    const haloStyle = {
+    const haloStyle: React.CSSProperties = {
       position: "absolute",
       inset: `-${spread}px`,
       pointerEvents: "none",
-      backdropFilter: `blur(${strength}px)`,
-      WebkitBackdropFilter: `blur(${strength}px)`,
+      background: tint,
+      backdropFilter: `blur(${strength * maxBlur}px)`,
+      WebkitBackdropFilter: `blur(${strength * maxBlur}px)`,
       maskImage: `${maskGradientH}, ${maskGradientV}`,
       WebkitMaskImage: `${maskGradientH}, ${maskGradientV}`,
       maskComposite: "intersect",
       WebkitMaskComposite: "source-in",
-    } as React.CSSProperties;
+    };
 
     return (
       <BlurHaloPortal container={container}>
