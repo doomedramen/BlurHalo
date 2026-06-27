@@ -56,7 +56,7 @@ export function Preview() {
         <div
           className="absolute inset-0 top-[33px]"
           style={{
-            backgroundImage: "url(/bg.jpg)",
+            backgroundImage: "url(bg.jpg)",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
