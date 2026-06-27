@@ -241,15 +241,40 @@ export default function Page() {
             </p>
 
             <h3 className="mb-4 text-lg font-semibold -tracking-[0.03em]">React</h3>
-            <div className="mb-8">
+            <div className="mb-3">
               <CodeBlock code={jsxSnippet} lang="tsx" />
             </div>
+            <p className="mb-8 text-[13px] leading-relaxed text-black/50 dark:text-white/35">
+              Drop{" "}
+              <a
+                href="https://github.com/doomedramen/blurhalo/blob/main/standalone/BlurHalo.tsx"
+                target="_blank"
+                rel="noopener"
+                className="underline hover:text-black dark:hover:text-white"
+              >
+                standalone/BlurHalo.tsx
+              </a>{" "}
+              into your project — self-contained, no extra utilities. Install{" "}
+              <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">@radix-ui/react-dialog</code> and{" "}
+              <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">lucide-react</code>.
+            </p>
 
             <h3 className="mb-4 text-lg font-semibold -tracking-[0.03em]">HTML + CSS</h3>
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-[0.75fr_1.25fr]">
               <CodeBlock code={htmlSnippet} lang="html" />
               <CodeBlock code={cssSnippet} lang="css" />
             </div>
+            <p className="mt-3 text-[13px] leading-relaxed text-black/50 dark:text-white/35">
+              Or grab the standalone CSS file:{" "}
+              <a
+                href="https://github.com/doomedramen/blurhalo/blob/main/standalone/blurhalo.css"
+                target="_blank"
+                rel="noopener"
+                className="underline hover:text-black dark:hover:text-white"
+              >
+                standalone/blurhalo.css
+              </a>
+            </p>
           </section>
         </RevealSection>
 
