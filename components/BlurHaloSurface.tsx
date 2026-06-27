@@ -25,12 +25,12 @@ export function BlurHaloSurface({
   const maskV = `linear-gradient(to bottom, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%)`;
 
   return (
-    <div className={cn("relative", className)} style={{ padding: spread }}>
+    <div className={cn("relative", className)}>
       <div
         aria-hidden
         style={{
           position: "absolute",
-          inset: 0,
+          inset: `-${spread}px`,
           pointerEvents: "none",
           borderRadius,
           backdropFilter: `blur(${blurPx}px)`,
