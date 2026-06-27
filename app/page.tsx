@@ -136,9 +136,17 @@ export default function Page() {
               not the page.
             </h1>
             <p className="mt-5 max-w-[560px] text-[17px] leading-relaxed tracking-tight text-black/60 dark:text-white/55">
-              BlurHalo is a single React component for modals, popovers, command menus, and dialogs. The
-              content stays sharp while the area <em>around</em> it receives a rounded, feathered backdrop blur
-              that fades naturally back into the page.
+              Unlike dialogs that blur the{" "}
+              <a
+                href="https://ui.shadcn.com/docs/components/radix/dialog"
+                target="_blank"
+                rel="noopener"
+                className="underline hover:text-black dark:hover:text-white"
+              >
+                entire page
+              </a>
+              , BlurHalo only blurs the area immediately around the dialog. The rest of the page stays crisp and
+              readable while the focused surface gets a soft, feathered backdrop blur that fades naturally outward.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <button
