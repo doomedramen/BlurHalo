@@ -130,7 +130,7 @@ export default function Page() {
       </BlurHalo>
 
       <main className="relative z-[1] mx-auto w-full max-w-[1200px] px-6 pb-24 pt-8">
-        <BlurHaloSurface spread={40} strength={0.25} borderRadius="9999px" className="sticky top-2 z-50 mb-[72px]">
+        <BlurHaloSurface spread={40} strength={0.25} borderRadius="9999px" className="sticky top-4 z-50 mb-[72px]">
           <Nav />
         </BlurHaloSurface>
 
