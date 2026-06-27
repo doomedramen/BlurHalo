@@ -9,10 +9,6 @@ import { BlurHaloSurface } from "@/components/BlurHaloSurface";
 import {
   BlurHalo,
   BlurHaloContent,
-  BlurHaloHeader,
-  BlurHaloTitle,
-  BlurHaloDescription,
-  BlurHaloFooter,
 } from "@/components/BlurHalo";
 
 const htmlSnippet = `<div class="blurhalo">
@@ -74,33 +70,21 @@ const cssSnippet = `.blurhalo {
   border-radius: var(--blurhalo-radius);
 }`;
 
-const jsxSnippet = `import {
-  BlurHalo,
-  BlurHaloContent,
-  BlurHaloHeader,
-  BlurHaloTitle,
-  BlurHaloDescription,
-  BlurHaloFooter,
-  BlurHaloTrigger,
-} from "@/components/BlurHalo"
+const jsxSnippet = `import { BlurHalo, BlurHaloContent, BlurHaloTrigger } from "@/components/BlurHalo"
 
 export function Demo() {
   return (
     <BlurHalo>
-      <BlurHaloTrigger asChild>
+      <BlurHaloTrigger>
         <button>Open dialog</button>
       </BlurHaloTrigger>
       <BlurHaloContent spread={60} strength={0.5}>
-        <BlurHaloHeader>
-          <BlurHaloTitle>Dialog title</BlurHaloTitle>
-          <BlurHaloDescription>
-            The content stays sharp while the surroundings blur.
-          </BlurHaloDescription>
-        </BlurHaloHeader>
-        <BlurHaloFooter>
+        <h2>Dialog title</h2>
+        <p>The content stays sharp while the surroundings blur.</p>
+        <div className="flex justify-end gap-2">
           <button>Cancel</button>
           <button>Confirm</button>
-        </BlurHaloFooter>
+        </div>
       </BlurHaloContent>
     </BlurHalo>
   );
@@ -114,25 +98,23 @@ export default function Page() {
       {/* Full-page interactive BlurHalo triggered by the CTA */}
       <BlurHalo open={liveOpen} onOpenChange={setLiveOpen}>
         <BlurHaloContent spread={60} strength={0.5}>
-          <BlurHaloHeader>
-            <BlurHaloTitle>Try BlurHalo</BlurHaloTitle>
-            <BlurHaloDescription>
-              This dialog uses the BlurHalo component. The halos fade out around the edge — the rest of the page stays sharp.
-            </BlurHaloDescription>
-          </BlurHaloHeader>
+          <h2 className="text-lg font-semibold leading-none tracking-tight">Try BlurHalo</h2>
+          <p className="text-sm text-muted-foreground">
+            This dialog uses the BlurHalo component. The halo fades out around the edge — the rest of the page stays sharp.
+          </p>
           <p className="text-sm text-muted-foreground">
             The dialog body has <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">bg-background</code> so it sits above the blurred layer.
             Tweak <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">spread</code> and{" "}
-            <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">strength</code> via props to control the halos size and intensity.
+            <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">strength</code> via props to control the halo size and intensity.
           </p>
-          <BlurHaloFooter>
+          <div className="flex justify-end">
             <button
               onClick={() => setLiveOpen(false)}
               className="inline-flex min-h-9 items-center rounded-lg border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.04] px-4 text-sm font-medium text-black dark:text-white transition hover:bg-black/[0.08] dark:hover:bg-white/[0.08]"
             >
               Close
             </button>
-          </BlurHaloFooter>
+          </div>
         </BlurHaloContent>
       </BlurHalo>
 
@@ -234,18 +216,15 @@ export default function Page() {
         {/* ── Code section ─────────────────────────── */}
         <RevealSection>
           <section id="code" className="mt-24">
-            <h2 className="mb-2.5 text-[30px] font-semibold -tracking-[0.05em]">Copy/paste implementation</h2>
+            <h2 className="mb-2.5 text-[30px] font-semibold -tracking-[0.05em]">Get it</h2>
             <p className="mb-7 max-w-[680px] text-[15px] leading-relaxed text-black/60 dark:text-white/55">
-              Use the React component for full interactivity or the plain HTML/CSS pattern for a zero-dependency
-              alternative. Tune the custom properties to change halo size, blur strength, radius, and tint.
+              Two ways to use BlurHalo — the React component (one file, full interactivity) or plain HTML
+              and CSS (zero dependencies, copy and paste).
             </p>
 
             <h3 className="mb-4 text-lg font-semibold -tracking-[0.03em]">React</h3>
-            <div className="mb-3">
-              <CodeBlock code={jsxSnippet} lang="tsx" />
-            </div>
-            <p className="mb-8 text-[13px] leading-relaxed text-black/50 dark:text-white/35">
-              Drop{" "}
+            <p className="mb-3 text-[14px] leading-relaxed text-black/55 dark:text-white/50">
+              <strong>1.</strong> Download{" "}
               <a
                 href="https://github.com/doomedramen/blurhalo/blob/main/standalone/BlurHalo.tsx"
                 target="_blank"
@@ -254,18 +233,25 @@ export default function Page() {
               >
                 standalone/BlurHalo.tsx
               </a>{" "}
-              into your project — self-contained, no extra utilities. Install{" "}
-              <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">@radix-ui/react-dialog</code> and{" "}
-              <code className="rounded bg-black/[0.06] dark:bg-white/[0.06] px-1">lucide-react</code>.
+              — a single file, no other dependencies.
             </p>
+            <p className="mb-3 text-[14px] leading-relaxed text-black/55 dark:text-white/50">
+              <strong>2.</strong> Use it:
+            </p>
+            <div className="mb-8">
+              <CodeBlock code={jsxSnippet} lang="tsx" />
+            </div>
 
             <h3 className="mb-4 text-lg font-semibold -tracking-[0.03em]">HTML + CSS</h3>
+            <p className="mb-3 text-[14px] leading-relaxed text-black/55 dark:text-white/50">
+              Zero build step — just copy and paste:
+            </p>
             <div className="grid grid-cols-1 gap-3 lg:grid-cols-[0.75fr_1.25fr]">
               <CodeBlock code={htmlSnippet} lang="html" />
               <CodeBlock code={cssSnippet} lang="css" />
             </div>
             <p className="mt-3 text-[13px] leading-relaxed text-black/50 dark:text-white/35">
-              Or grab the standalone CSS file:{" "}
+              Or grab the CSS file directly:{" "}
               <a
                 href="https://github.com/doomedramen/blurhalo/blob/main/standalone/blurhalo.css"
                 target="_blank"

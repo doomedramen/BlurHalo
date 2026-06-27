@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
-import { BlurHalo, BlurHaloContent } from "@/components/BlurHalo";
+import { useState } from "react";
 
 const presets = {
   subtle: { blur: 0.12, spread: 20 },
@@ -14,11 +13,6 @@ type PresetKey = keyof typeof presets;
 export function Preview() {
   const [blur, setBlur] = useState(0.5);
   const [spread, setSpread] = useState(60);
-  const [container, setContainer] = useState<HTMLElement | null>(null);
-
-  const previewRef = useCallback((node: HTMLDivElement | null) => {
-    if (node) setContainer(node);
-  }, []);
 
   const applyPreset = (key: PresetKey) => {
     const p = presets[key];
@@ -44,7 +38,6 @@ export function Preview() {
   return (
     <div>
       <div
-        ref={previewRef}
         className="relative min-h-[620px] overflow-hidden rounded-[28px] border shadow-[inset_0_0_0_1px_rgba(0,0,0,0.03)] bg-white/60 dark:bg-[#08080c]/60 border-black/[0.06] dark:border-white/[0.06] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]"
         style={{ transform: "translateZ(0)" }}
       >
@@ -69,17 +62,25 @@ export function Preview() {
           }}
         />
 
-        {/* BlurHalo dialog */}
-        {container && (
-          <BlurHalo open modal={false}>
-            <BlurHaloContent
-              spread={spread}
-              strength={blur}
-              showClose={false}
-              container={container}
-              className="rounded-[20px] border-black/[0.12] dark:border-white/[0.12] bg-white dark:bg-[#0e0f16] shadow-[0_32px_100px_rgba(0,0,0,0.25)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.06),0_32px_100px_rgba(0,0,0,0.5)] overflow-hidden"
-              style={{ maxWidth: 280 }}
-            >
+        {/* Static demo dialog — visual only, no open/close logic */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <div className="relative pointer-events-auto" style={{ maxWidth: 280 }}>
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: `-${spread}px`,
+                pointerEvents: "none" as const,
+                backdropFilter: `blur(${blur * 32}px)`,
+                WebkitBackdropFilter: `blur(${blur * 32}px)`,
+                maskImage: `linear-gradient(to right, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%), linear-gradient(to bottom, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%)`,
+                WebkitMaskImage: `linear-gradient(to right, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%), linear-gradient(to bottom, transparent 0%, #000 ${spread}px, #000 calc(100% - ${spread}px), transparent 100%)`,
+                maskComposite: "intersect" as const,
+                WebkitMaskComposite: "source-in" as const,
+              }}
+              className="z-0"
+            />
+            <div className="relative z-10 rounded-lg border border-black/[0.12] dark:border-white/[0.12] bg-white dark:bg-[#0e0f16] shadow-[0_32px_100px_rgba(0,0,0,0.25)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.06),0_32px_100px_rgba(0,0,0,0.5)] overflow-hidden">
               <div className="px-4 pb-3 pt-3">
                 <p className="mb-1.5 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-black/45 dark:text-white/45">
                   <span className="h-[4px] w-[4px] rounded-full bg-[#5e6ad2] shadow-[0_0_10px_rgba(94,106,210,0.7)]" />
@@ -95,10 +96,24 @@ export function Preview() {
                   </button>
                 </div>
               </div>
-            </BlurHaloContent>
-          </BlurHalo>
-        )}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Image attribution */}
+      <p className="mt-1.5 text-right text-[10px] text-black/25 dark:text-white/20">
+        Photo by{" "}
+        <a
+          href="https://www.pexels.com/@peter-dyllong-2158803154/"
+          target="_blank"
+          rel="noopener"
+          className="underline hover:text-black/40 dark:hover:text-white/35"
+        >
+          Peter Dyllong
+        </a>{" "}
+        on Pexels
+      </p>
 
       {/* Controls */}
       <div className="mt-4 flex flex-wrap items-end gap-5 rounded-[20px] border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02] px-5 py-4">

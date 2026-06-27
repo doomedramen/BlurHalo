@@ -8,26 +8,17 @@ Feathered backdrop-blur for modals, dialogs, and focused surfaces. The content s
 
 ## Quick start
 
-### React (recommended)
+### React
 
-Drop a single file into your project — no extra utilities needed:
+Drop a single file — zero dependencies beyond React.
 
 > [`standalone/BlurHalo.tsx`](standalone/BlurHalo.tsx)
 
-Install the peer dependencies:
-
-```bash
-pnpm add @radix-ui/react-dialog lucide-react clsx tailwind-merge class-variance-authority
-# or: npm install @radix-ui/react-dialog lucide-react clsx tailwind-merge class-variance-authority
-```
-
-Usage:
-
 ```tsx
-import { BlurHalo, BlurHaloContent, BlurHaloTrigger } from "@/components/BlurHalo";
+import { BlurHalo, BlurHaloContent, BlurHaloTrigger } from "./BlurHalo";
 
 <BlurHalo>
-  <BlurHaloTrigger asChild>
+  <BlurHaloTrigger>
     <button>Open dialog</button>
   </BlurHaloTrigger>
   <BlurHaloContent spread={60} strength={0.5}>
