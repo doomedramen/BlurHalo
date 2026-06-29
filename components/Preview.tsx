@@ -119,7 +119,7 @@ function DemoApp() {
             >
               <span className="truncate font-medium">{row.name}</span>
               <span className="truncate text-black/45 dark:text-white/40">{row.env}</span>
-              <span className="w-16">
+              <span>
                 <span
                   className={cn(
                     "inline-flex items-center gap-1",
@@ -135,7 +135,7 @@ function DemoApp() {
                   {row.status}
                 </span>
               </span>
-              <span className="w-12 text-right text-black/40 dark:text-white/35">{row.time}</span>
+              <span className="text-right text-black/40 dark:text-white/35">{row.time}</span>
             </div>
           ))}
         </div>
