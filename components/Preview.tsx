@@ -385,6 +385,7 @@ export function Preview() {
               {tintSwatches.map((t) => (
                 <button
                   key={t.label}
+                  aria-label={t.label}
                   title={t.label}
                   onClick={() => setTint(t.value)}
                   className={cn(
