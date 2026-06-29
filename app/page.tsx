@@ -97,8 +97,8 @@ export default function Page() {
     <>
       {/* Full-page interactive BlurHalo triggered by the CTA */}
       <BlurHalo open={liveOpen} onOpenChange={setLiveOpen}>
-        <BlurHaloContent spread={60} strength={0.5}>
-          <h2 className="text-lg font-semibold leading-none tracking-tight">Try BlurHalo</h2>
+        <BlurHaloContent spread={60} strength={0.5} labelledBy="blurhalo-demo-title">
+          <h2 id="blurhalo-demo-title" className="text-lg font-semibold leading-none tracking-tight">Try BlurHalo</h2>
           <p className="text-sm text-muted-foreground">
             This dialog uses the BlurHalo component. The halo fades out around the edge — the rest of the page stays sharp.
           </p>
@@ -261,7 +261,7 @@ export default function Page() {
             <p className="mt-3 text-[13px] leading-relaxed text-black/50 dark:text-white/35">
               Or grab the CSS file directly:{" "}
               <a
-                href="https://github.com/doomedramen/blurhalo/blob/main/standalone/blurhalo.css"
+                href="https://github.com/doomedramen/BlurHalo/blob/main/standalone/blurhalo.css"
                 target="_blank"
                 rel="noopener"
                 className="underline hover:text-black dark:hover:text-white"

@@ -4,8 +4,6 @@ Feathered backdrop-blur for modals, dialogs, and focused surfaces. The content s
 
 [**Live demo →**](https://doomedramen.github.io/BlurHalo)
 
-> ![screenshot](screenshot.png)
-
 ## Quick start
 
 ### React
@@ -84,6 +82,8 @@ Drop a single CSS file — no JavaScript, no build step.
 | `maxBlur` | `number` | `32` | Pixel blur radius when `strength` is 1 |
 | `showClose` | `boolean` | `true` | Show the built-in × close button |
 | `tint` | `string` | — | Optional background color for the halo (e.g. `rgba(255,255,255,0.05)`) |
+| `label` | `string` | `"Dialog"` | Accessible name for the dialog. Ignored when `labelledBy` is set |
+| `labelledBy` | `string` | — | `id` of the element (e.g. a heading) that labels the dialog. Takes precedence over `label` |
 | `className` | `string` | — | Applied to the dialog body (border, bg, radius, padding) |
 | `container` | `HTMLElement \| null` | `document.body` | Portal container element |
 

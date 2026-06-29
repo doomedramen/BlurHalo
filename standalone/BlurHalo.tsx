@@ -79,6 +79,8 @@ export function BlurHalo({
 export function BlurHaloTrigger({
   children,
   className,
+  onClick,
+  onKeyDown,
   ...props
 }: {
   children: ReactNode;
@@ -88,7 +90,19 @@ export function BlurHaloTrigger({
 
   return (
     <span
-      onClick={() => setOpen(true)}
+      role="button"
+      tabIndex={0}
+      onClick={(e) => {
+        onClick?.(e);
+        setOpen(true);
+      }}
+      onKeyDown={(e) => {
+        onKeyDown?.(e);
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen(true);
+        }
+      }}
       className={cn("cursor-pointer", className)}
       {...props}
     >
@@ -112,6 +126,10 @@ export interface BlurHaloContentProps {
   showClose?: boolean;
   /** Optional subtle background color for the halo (e.g. "rgba(255,255,255,0.05)"). */
   tint?: string;
+  /** Accessible name for the dialog. Ignored when `labelledBy` is set. Default "Dialog". */
+  label?: string;
+  /** id of the element (e.g. a heading) that labels the dialog. Takes precedence over `label`. */
+  labelledBy?: string;
   /**
    * className applied to the dialog body (border, bg, radius, padding, etc.).
    * The halo is rendered as an independent sibling and is not affected by this.
@@ -126,6 +144,9 @@ export interface BlurHaloContentProps {
   children: ReactNode;
 }
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 /**
  * The dialog content — renders an overlay, a feathered backdrop-blur halo
  * around the dialog body, and the body itself. The halo extends `spread`
@@ -138,6 +159,8 @@ export function BlurHaloContent({
   maxBlur = 32,
   showClose = true,
   tint,
+  label = "Dialog",
+  labelledBy,
   className,
   container,
   style,
@@ -145,28 +168,80 @@ export function BlurHaloContent({
 }: BlurHaloContentProps) {
   const { open, setOpen } = useBlurHalo();
   const overlayRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
-  /* Escape key */
+  /* Only portal after mount so static / server rendering never touches `document`. */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  /* Escape to close + Tab focus trap */
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const node = dialogRef.current;
+      if (!node) return;
+      const focusable = Array.from(
+        node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ).filter((el) => el.offsetParent !== null);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        node.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && (active === first || !node.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !node.contains(active))) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [open, setOpen]);
 
-  /* Lock body scroll */
+  /* Move focus into the dialog on open, restore it to the trigger on close */
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const node = dialogRef.current;
+    const first = node?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+    (first ?? node)?.focus();
+    return () => previouslyFocused?.focus?.();
+  }, [open]);
+
+  /* Lock body scroll, compensating for the scrollbar to avoid layout shift */
+  useEffect(() => {
+    if (!open) return;
+    const { body, documentElement } = document;
+    const prevOverflow = body.style.overflow;
+    const prevPaddingRight = body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - documentElement.clientWidth;
+
+    body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      const currentPad = parseFloat(getComputedStyle(body).paddingRight) || 0;
+      body.style.paddingRight = `${currentPad + scrollbarWidth}px`;
+    }
     return () => {
-      document.body.style.overflow = prev;
+      body.style.overflow = prevOverflow;
+      body.style.paddingRight = prevPaddingRight;
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
   const blurPx = strength * maxBlur;
 
@@ -200,12 +275,18 @@ export function BlurHaloContent({
       {/* Dialog wrapper */}
       <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]" style={style}>
         {/* Halo */}
-        <div aria-hidden style={haloStyle} className="z-0 animate-in fade-in-0" />
+        <div aria-hidden style={haloStyle} className="z-0 motion-safe:animate-in motion-safe:fade-in-0" />
 
         {/* Dialog body */}
         <div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={labelledBy ? undefined : label}
+          aria-labelledby={labelledBy}
+          tabIndex={-1}
           className={cn(
-            "relative z-10 grid gap-4 border bg-background p-6 shadow-lg sm:rounded-lg animate-in fade-in-0 zoom-in-95",
+            "relative z-10 grid gap-4 border bg-background p-6 shadow-lg outline-none sm:rounded-lg motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95",
             className,
           )}
         >
