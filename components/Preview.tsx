@@ -3,6 +3,14 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+const tintSwatches = [
+  { label: "White",  value: "rgba(255,255,255,0.10)", swatch: "#ffffff" },
+  { label: "Violet", value: "rgba(139,92,246,0.15)",  swatch: "#8b5cf6" },
+  { label: "Amber",  value: "rgba(251,191,36,0.12)",  swatch: "#fbbf24" },
+  { label: "Blue",   value: "rgba(59,130,246,0.12)",  swatch: "#3b82f6" },
+  { label: "Rose",   value: "rgba(244,63,94,0.12)",   swatch: "#f43f5e" },
+];
+
 const presets = {
   subtle: { blur: 0.12, spread: 20 },
   default: { blur: 0.5, spread: 60 },
@@ -99,7 +107,8 @@ function DemoApp() {
         {/* Table — stretches to fill the window so content always sits behind the dialog */}
         <div className="min-h-0 flex-1 overflow-hidden rounded-lg border border-black/[0.06] dark:border-white/[0.06]">
           <div className="flex items-center gap-3 border-b border-black/[0.06] bg-black/[0.02] px-3 py-1.5 text-[9.5px] font-medium uppercase tracking-wide text-black/40 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-white/35">
-            <span className="flex-1">Project</span>
+            <span className="truncate">Project</span>
+            <span className="flex-1" />
             <span className="w-20">Environment</span>
             <span className="w-16">Status</span>
             <span className="w-12 text-right">Updated</span>
@@ -109,7 +118,8 @@ function DemoApp() {
               key={row.name}
               className="flex items-center gap-3 border-b border-black/[0.04] px-3 py-2 text-[10.5px] last:border-0 dark:border-white/[0.04]"
             >
-              <span className="flex-1 truncate font-medium">{row.name}</span>
+              <span className="truncate font-medium">{row.name}</span>
+              <span className="flex-1" />
               <span className="w-20 text-black/45 dark:text-white/40">{row.env}</span>
               <span className="w-16">
                 <span
@@ -140,6 +150,7 @@ export function Preview() {
   const [blur, setBlur] = useState(0.5);
   const [spread, setSpread] = useState(60);
   const [mode, setMode] = useState<Mode>("halo");
+  const [tint, setTint] = useState<string | undefined>(undefined);
 
   const applyPreset = (key: PresetKey) => {
     const p = presets[key];
@@ -226,6 +237,7 @@ export function Preview() {
                   position: "absolute",
                   inset: `-${spread}px`,
                   pointerEvents: "none",
+                  background: tint,
                   backdropFilter: `blur(${blurPx}px)`,
                   WebkitBackdropFilter: `blur(${blurPx}px)`,
                   maskImage: `${maskH}, ${maskV}`,
@@ -348,6 +360,45 @@ export function Preview() {
                 {key.charAt(0).toUpperCase() + key.slice(1)}
               </button>
             ))}
+          </div>
+
+          {/* Tint */}
+          <div
+            className={cn(
+              "flex flex-wrap items-center gap-3 transition-opacity",
+              mode === "full" && "pointer-events-none opacity-40",
+            )}
+          >
+            <span className="text-[11px] font-medium uppercase tracking-[0.03em] text-black/55 dark:text-white/55">
+              Tint
+            </span>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setTint(undefined)}
+                className={cn(
+                  "h-[22px] rounded-full border px-2.5 text-[10px] font-medium transition",
+                  tint === undefined
+                    ? "border-black/25 dark:border-white/25 text-black dark:text-white bg-black/[0.06] dark:bg-white/[0.06]"
+                    : "border-black/[0.08] dark:border-white/[0.08] text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white",
+                )}
+              >
+                None
+              </button>
+              {tintSwatches.map((t) => (
+                <button
+                  key={t.label}
+                  title={t.label}
+                  onClick={() => setTint(t.value)}
+                  className={cn(
+                    "h-[22px] w-[22px] rounded-full transition",
+                    tint === t.value
+                      ? "ring-2 ring-black/50 dark:ring-white/50 ring-offset-1 scale-110"
+                      : "opacity-70 hover:opacity-100 hover:scale-105",
+                  )}
+                  style={{ background: t.swatch }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
