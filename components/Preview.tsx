@@ -47,7 +47,11 @@ export function Preview() {
         <div className="relative flex items-center border-b border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.015] px-4 py-2.5">
           <div className="flex gap-2">
             {["#ff5f56", "#ffbd2e", "#27ca40"].map((color) => (
-              <span key={color} className="h-3 w-3 rounded-full" style={{ background: color, opacity: 0.85 }} />
+              <span
+                key={color}
+                className="h-3 w-3 rounded-full"
+                style={{ background: color, opacity: 0.85 }}
+              />
             ))}
           </div>
         </div>
@@ -82,8 +86,20 @@ export function Preview() {
             />
             <div className="relative z-10 rounded-lg border border-black/[0.12] dark:border-white/[0.12] bg-white dark:bg-[#0e0f16] shadow-[0_32px_100px_rgba(0,0,0,0.25)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.06),0_32px_100px_rgba(0,0,0,0.5)] overflow-hidden">
               <div className="px-4 pb-3 pt-3">
-                <button className="absolute right-3 top-3 rounded-sm opacity-60 hover:opacity-100 transition-opacity text-black dark:text-white" aria-label="Close">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <button
+                  className="absolute right-3 top-3 rounded-sm opacity-60 hover:opacity-100 transition-opacity text-black dark:text-white"
+                  aria-label="Close"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
@@ -92,7 +108,9 @@ export function Preview() {
                   <span className="h-[4px] w-[4px] rounded-full bg-[#5e6ad2] shadow-[0_0_10px_rgba(94,106,210,0.7)]" />
                   Deploy
                 </p>
-                <h2 className="text-[15px] font-semibold leading-[1.2] -tracking-[0.03em] text-black dark:text-white pr-2">Publish to production?</h2>
+                <h2 className="text-[15px] font-semibold leading-[1.2] -tracking-[0.03em] text-black dark:text-white pr-2">
+                  Publish to production?
+                </h2>
                 <div className="mt-3 flex justify-end gap-2">
                   <button className="h-[30px] rounded-md border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.04] px-3 text-[12px] font-medium text-black dark:text-white transition hover:bg-black/[0.08] dark:hover:bg-white/[0.08]">
                     Cancel

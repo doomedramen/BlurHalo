@@ -1,6 +1,6 @@
 # BlurHalo
 
-Feathered backdrop-blur for modals, dialogs, and focused surfaces. The content stays sharp while the area *around* it receives a rounded, feathered blur that fades back into the page — the rest of the page stays crisp.
+Feathered backdrop-blur for modals, dialogs, and focused surfaces. The content stays sharp while the area _around_ it receives a rounded, feathered blur that fades back into the page — the rest of the page stays crisp.
 
 [**Live demo →**](https://doomedramen.github.io/BlurHalo)
 
@@ -23,7 +23,7 @@ import { BlurHalo, BlurHaloContent, BlurHaloTrigger } from "./BlurHalo";
     <h2>Publish changes?</h2>
     <p>The surrounding interface blurs softly around this dialog.</p>
   </BlurHaloContent>
-</BlurHalo>
+</BlurHalo>;
 ```
 
 ### HTML + CSS
@@ -41,10 +41,10 @@ Drop a single CSS file — no JavaScript, no build step.
 
 ```css
 .blurhalo {
-  --blur: 16px;   /* blur radius */
-  --fade: 60px;   /* halo spread distance */
+  --blur: 16px; /* blur radius */
+  --fade: 60px; /* halo spread distance */
   --radius: 24px; /* corner radius */
-  --tint: rgba(255,255,255,0.075);
+  --tint: rgba(255, 255, 255, 0.075);
 
   position: relative;
   isolation: isolate;
@@ -59,8 +59,20 @@ Drop a single CSS file — no JavaScript, no build step.
   backdrop-filter: blur(var(--blur));
 
   mask-image:
-    linear-gradient(to right, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+    linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 var(--fade),
+      #000 calc(100% - var(--fade)),
+      transparent 100%
+    );
   mask-composite: intersect;
 }
 
@@ -75,17 +87,17 @@ Drop a single CSS file — no JavaScript, no build step.
 
 ### `BlurHaloContent`
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `spread` | `number` | `80` | How far (px) the blurred halo extends beyond the dialog edge |
-| `strength` | `number` | `0.5` | Blur intensity, 0 (none) → 1 (max). Multiplied against `maxBlur` |
-| `maxBlur` | `number` | `32` | Pixel blur radius when `strength` is 1 |
-| `showClose` | `boolean` | `true` | Show the built-in × close button |
-| `tint` | `string` | — | Optional background color for the halo (e.g. `rgba(255,255,255,0.05)`) |
-| `label` | `string` | `"Dialog"` | Accessible name for the dialog. Ignored when `labelledBy` is set |
-| `labelledBy` | `string` | — | `id` of the element (e.g. a heading) that labels the dialog. Takes precedence over `label` |
-| `className` | `string` | — | Applied to the dialog body (border, bg, radius, padding) |
-| `container` | `HTMLElement \| null` | `document.body` | Portal container element |
+| Prop         | Type                  | Default         | Description                                                                                |
+| ------------ | --------------------- | --------------- | ------------------------------------------------------------------------------------------ |
+| `spread`     | `number`              | `80`            | How far (px) the blurred halo extends beyond the dialog edge                               |
+| `strength`   | `number`              | `0.5`           | Blur intensity, 0 (none) → 1 (max). Multiplied against `maxBlur`                           |
+| `maxBlur`    | `number`              | `32`            | Pixel blur radius when `strength` is 1                                                     |
+| `showClose`  | `boolean`             | `true`          | Show the built-in × close button                                                           |
+| `tint`       | `string`              | —               | Optional background color for the halo (e.g. `rgba(255,255,255,0.05)`)                     |
+| `label`      | `string`              | `"Dialog"`      | Accessible name for the dialog. Ignored when `labelledBy` is set                           |
+| `labelledBy` | `string`              | —               | `id` of the element (e.g. a heading) that labels the dialog. Takes precedence over `label` |
+| `className`  | `string`              | —               | Applied to the dialog body (border, bg, radius, padding)                                   |
+| `container`  | `HTMLElement \| null` | `document.body` | Portal container element                                                                   |
 
 ## How it works
 

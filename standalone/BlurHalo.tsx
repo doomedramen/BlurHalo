@@ -65,11 +65,7 @@ export function BlurHalo({
     [isControlled, onOpenChange],
   );
 
-  return (
-    <BlurHaloCtx.Provider value={{ open, setOpen }}>
-      {children}
-    </BlurHaloCtx.Provider>
-  );
+  return <BlurHaloCtx.Provider value={{ open, setOpen }}>{children}</BlurHaloCtx.Provider>;
 }
 
 /* ------------------------------------------------------------------ */
@@ -186,9 +182,9 @@ export function BlurHaloContent({
 
       const node = dialogRef.current;
       if (!node) return;
-      const focusable = Array.from(
-        node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
-      ).filter((el) => el.offsetParent !== null);
+      const focusable = Array.from(node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+        (el) => el.offsetParent !== null,
+      );
 
       if (focusable.length === 0) {
         e.preventDefault();
@@ -273,9 +269,16 @@ export function BlurHaloContent({
       />
 
       {/* Dialog wrapper */}
-      <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]" style={style}>
+      <div
+        className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]"
+        style={style}
+      >
         {/* Halo */}
-        <div aria-hidden style={haloStyle} className="z-0 motion-safe:animate-in motion-safe:fade-in-0" />
+        <div
+          aria-hidden
+          style={haloStyle}
+          className="z-0 motion-safe:animate-in motion-safe:fade-in-0"
+        />
 
         {/* Dialog body */}
         <div

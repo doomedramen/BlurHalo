@@ -3,8 +3,8 @@
    ------------------------------------------------------------------ */
 
 .blurhalo {
-  --blur: 16px;   /* backdrop-filter blur radius */
-  --fade: 60px;   /* how far the halo spreads outward */
+  --blur: 16px; /* backdrop-filter blur radius */
+  --fade: 60px; /* how far the halo spreads outward */
   --radius: 24px; /* corner radius of the content */
   --tint: rgba(255, 255, 255, 0.075);
 
@@ -22,28 +22,36 @@
   -webkit-backdrop-filter: blur(var(--blur));
 
   mask-image:
-    linear-gradient(to right,
+    linear-gradient(
+      to right,
       transparent 0,
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent 100%),
-    linear-gradient(to bottom,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
       transparent 0,
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent 100%);
+      transparent 100%
+    );
   mask-composite: intersect;
   -webkit-mask-image:
-    linear-gradient(to right,
+    linear-gradient(
+      to right,
       transparent 0,
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent 100%),
-    linear-gradient(to bottom,
+      transparent 100%
+    ),
+    linear-gradient(
+      to bottom,
       transparent 0,
       #000 var(--fade),
       #000 calc(100% - var(--fade)),
-      transparent 100%);
+      transparent 100%
+    );
   -webkit-mask-composite: source-in;
 }
 

@@ -28,18 +28,20 @@ export function BlurHaloSurface({
     <div className={cn("relative", className)}>
       <div
         aria-hidden
-        style={{
-          position: "absolute",
-          inset: `-${spread}px`,
-          pointerEvents: "none",
-          borderRadius,
-          backdropFilter: `blur(${blurPx}px)`,
-          WebkitBackdropFilter: `blur(${blurPx}px)`,
-          maskImage: `${maskH}, ${maskV}`,
-          WebkitMaskImage: `${maskH}, ${maskV}`,
-          maskComposite: "intersect",
-          WebkitMaskComposite: "source-in",
-        } as React.CSSProperties}
+        style={
+          {
+            position: "absolute",
+            inset: `-${spread}px`,
+            pointerEvents: "none",
+            borderRadius,
+            backdropFilter: `blur(${blurPx}px)`,
+            WebkitBackdropFilter: `blur(${blurPx}px)`,
+            maskImage: `${maskH}, ${maskV}`,
+            WebkitMaskImage: `${maskH}, ${maskV}`,
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
+          } as React.CSSProperties
+        }
       />
       <div className="relative z-10">{children}</div>
     </div>

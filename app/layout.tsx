@@ -15,11 +15,7 @@ export const metadata: Metadata = {
     "A self-contained React dialog component that paints a feathered backdrop-blur halo around focused surfaces. The content stays sharp while the area around it softly blurs.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body>

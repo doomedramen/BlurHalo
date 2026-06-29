@@ -31,11 +31,13 @@ export function CodeBlock({ code, lang }: { code: string; lang?: string }) {
       >
         {copied ? "Copied!" : "Copy"}
       </button>
-      <pre className={cn(
+      <pre
+        className={cn(
           "m-0 overflow-auto rounded-xl border p-5 text-[12.5px] leading-relaxed",
           "border-black/[0.08] dark:border-white/[0.06] bg-[#f5f5f8] dark:bg-[#040508]/80 text-black/75 dark:text-white/75",
           lang && "pt-10",
-        )}>
+        )}
+      >
         <code>{code}</code>
       </pre>
     </div>
