@@ -117,6 +117,21 @@
     color: transparent;
   }
 
+  /* Shiki code blocks — dark is baked in as the default; swap to the light
+     theme via CSS variables when the .light theme class is active. */
+  .shiki {
+    background: transparent !important;
+  }
+
+  .light .shiki,
+  .light .shiki span {
+    color: var(--shiki-light) !important;
+    background-color: transparent !important;
+    font-style: var(--shiki-light-font-style) !important;
+    font-weight: var(--shiki-light-font-weight) !important;
+    text-decoration: var(--shiki-light-text-decoration) !important;
+  }
+
   /* Range slider thumbs (web + moz) */
   .range-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
