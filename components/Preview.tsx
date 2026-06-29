@@ -106,21 +106,19 @@ function DemoApp() {
 
         {/* Table — stretches to fill the window so content always sits behind the dialog */}
         <div className="min-h-0 flex-1 overflow-hidden rounded-lg border border-black/[0.06] dark:border-white/[0.06]">
-          <div className="flex items-center gap-3 border-b border-black/[0.06] bg-black/[0.02] px-3 py-1.5 text-[9.5px] font-medium uppercase tracking-wide text-black/40 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-white/35">
+          <div className="grid grid-cols-4 items-center gap-x-3 border-b border-black/[0.06] bg-black/[0.02] px-3 py-1.5 text-[9.5px] font-medium uppercase tracking-wide text-black/40 dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-white/35">
             <span className="truncate">Project</span>
-            <span className="flex-1" />
-            <span className="w-20">Environment</span>
-            <span className="w-16">Status</span>
-            <span className="w-12 text-right">Updated</span>
+            <span className="truncate">Environment</span>
+            <span>Status</span>
+            <span className="text-right">Updated</span>
           </div>
           {rows.map((row) => (
             <div
               key={row.name}
-              className="flex items-center gap-3 border-b border-black/[0.04] px-3 py-2 text-[10.5px] last:border-0 dark:border-white/[0.04]"
+              className="grid grid-cols-4 items-center gap-x-3 border-b border-black/[0.04] px-3 py-2 text-[10.5px] last:border-0 dark:border-white/[0.04]"
             >
               <span className="truncate font-medium">{row.name}</span>
-              <span className="flex-1" />
-              <span className="w-20 text-black/45 dark:text-white/40">{row.env}</span>
+              <span className="truncate text-black/45 dark:text-white/40">{row.env}</span>
               <span className="w-16">
                 <span
                   className={cn(
