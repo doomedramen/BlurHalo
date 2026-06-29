@@ -2,9 +2,6 @@
 const nextConfig = {
   output: "export",
   basePath: process.env.NODE_ENV === "production" ? "/BlurHalo" : "",
-  // Use a separate build directory in production so `next build` never clobbers
-  // the `.next` state of a running `next dev` server (and vice versa).
-  distDir: process.env.NODE_ENV === "production" ? ".next-prod" : ".next",
   trailingSlash: true,
   images: {
     unoptimized: true,
